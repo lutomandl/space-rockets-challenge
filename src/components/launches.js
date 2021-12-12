@@ -1,5 +1,13 @@
 import React from "react"
-import { Badge, Box, Image, SimpleGrid, Text, Flex } from "@chakra-ui/react"
+import {
+  Badge,
+  Box,
+  Image,
+  SimpleGrid,
+  Text,
+  Flex,
+  Spacer,
+} from "@chakra-ui/react"
 import { format as timeAgo } from "timeago.js"
 import { Link } from "react-router-dom"
 
@@ -9,6 +17,7 @@ import Error from "./error"
 import Breadcrumbs from "./breadcrumbs"
 import LoadMoreButton from "./load-more-button"
 import StarButton from "./star-button"
+import FavoriteLaunches from "./favoriteLaunches"
 
 const PAGE_SIZE = 12
 
@@ -24,9 +33,13 @@ export default function Launches() {
   console.log(data, error)
   return (
     <div>
-      <Breadcrumbs
-        items={[{ label: "Home", to: "/" }, { label: "Launches" }]}
-      />
+      <Flex justify="center">
+        <Breadcrumbs
+          items={[{ label: "Home", to: "/" }, { label: "Launches" }]}
+        />
+        <Spacer />
+        <FavoriteLaunches />
+      </Flex>
       <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4">
         {error && <Error />}
         {data &&
@@ -56,10 +69,7 @@ export function LaunchItem({ launch }) {
       position="relative"
     >
       <StarButton launch={launch} />
-      <Box
-        as={Link}
-        to={`/launches/${launch.flight_number.toString()}`}
-      >
+      <Box as={Link} to={`/launches/${launch.flight_number.toString()}`}>
         <Image
           src={
             launch.links.flickr_images[0]?.replace("_o.jpg", "_z.jpg") ??
