@@ -25,6 +25,7 @@ import { useSpaceX } from "../utils/use-space-x"
 import { formatDateTime } from "../utils/format-date"
 import Error from "./error"
 import Breadcrumbs from "./breadcrumbs"
+import StarButton from "./star-button"
 
 export default function Launch() {
   let { launchId } = useParams()
@@ -108,6 +109,7 @@ function Header({ launch }) {
             Failed
           </Badge>
         )}
+        <StarButton launch={launch} />
       </Stack>
     </Flex>
   )
