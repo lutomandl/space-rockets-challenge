@@ -12,6 +12,14 @@ function StarButton({ launch, ...props }) {
     iconColor = "#FFB233"
   }
 
+  const handleClick = () => {
+    if (props.favorites.includes(launch.flight_number)) {
+      props.removeFavorite(launch.flight_number)
+    } else {
+      props.addFavorite(launch)
+    }
+  }
+
   return (
     <Tooltip
       label={label}
@@ -29,6 +37,7 @@ function StarButton({ launch, ...props }) {
         top={3}
         right={3}
         icon={<StarIcon color={iconColor} />}
+        onClick={handleClick}
       />
     </Tooltip>
   )
@@ -40,4 +49,15 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(StarButton)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    removeFavorite: (flight_number) => {
+      dispatch({ type: "REMOVE_FAVORITE", id: flight_number })
+    },
+    addFavorite: (launch) => {
+      dispatch({ type: "ADD_FAVORITE", payload: launch })
+    },
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(StarButton)
