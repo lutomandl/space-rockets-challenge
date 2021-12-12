@@ -8,11 +8,16 @@ import {
   DrawerCloseButton,
   useDisclosure,
   Button,
+  SimpleGrid,
 } from "@chakra-ui/react"
+import { connect } from "react-redux"
 
-export default function FavoriteLaunches() {
+import { LaunchItem } from "./launches"
+
+function FavoriteLaunches(props) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
+  const launches = props.favorites
 
   return (
     <>
@@ -30,13 +35,32 @@ export default function FavoriteLaunches() {
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader borderBottomWidth="1px">
-            Your Favorite Launches
+            Your Favorite Launches ({props.favorites.length})
           </DrawerHeader>
           <DrawerBody>
-            <p>You have no favorite launches yet...</p>
+            {launches.length > 0 ? (
+              <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4">
+                {launches &&
+                  launches
+                    .flat()
+                    .map((launch) => (
+                      <LaunchItem launch={launch} key={launch.flight_number} />
+                    ))}
+              </SimpleGrid>
+            ) : (
+              <p>You have no favorite launches yet...</p>
+            )}
           </DrawerBody>
         </DrawerContent>
       </Drawer>
     </>
   )
 }
+
+const mapStateToProps = (state) => {
+  return {
+    favorites: state.favorites,
+  }
+}
+
+export default connect(mapStateToProps)(FavoriteLaunches)
