@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export function formatDate(timestamp) {
   return new Intl.DateTimeFormat("en-US", {
     weekday: "long",
@@ -8,13 +10,9 @@ export function formatDate(timestamp) {
 }
 
 export function formatDateTime(timestamp) {
-  return new Intl.DateTimeFormat("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-    second: "numeric",
-    timeZoneName: "short",
-  }).format(new Date(timestamp));
+  return moment.parseZone(timestamp).format('MMMM D, YYYY, H:mm:ss A [GMT] Z')
+}
+
+export function formatDateTimeLocal(timestamp) {
+  return moment(timestamp).format('MMMM D, YYYY, H:mm:ss A [GMT] Z')
 }
