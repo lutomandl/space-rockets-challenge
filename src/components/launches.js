@@ -1,5 +1,5 @@
 import React from "react"
-import { Badge, Box, Image, SimpleGrid, Text, Flex } from "@chakra-ui/core"
+import { Badge, Box, Image, SimpleGrid, Text, Flex } from "@chakra-ui/react"
 import { format as timeAgo } from "timeago.js"
 import { Link } from "react-router-dom"
 
@@ -81,11 +81,11 @@ export function LaunchItem({ launch }) {
       <Box p="6">
         <Box d="flex" alignItems="baseline">
           {launch.launch_success ? (
-            <Badge px="2" variant="solid" variantColor="green">
+            <Badge px="2" variant="solid" colorScheme="green">
               Successful
             </Badge>
           ) : (
-            <Badge px="2" variant="solid" variantColor="red">
+            <Badge px="2" variant="solid" colorScheme="red">
               Failed
             </Badge>
           )}
