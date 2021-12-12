@@ -1,7 +1,7 @@
-import React from "react";
-import { useParams, Link as RouterLink } from "react-router-dom";
-import { format as timeAgo } from "timeago.js";
-import { Watch, MapPin, Navigation, Layers } from "react-feather";
+import React from "react"
+import { useParams, Link as RouterLink } from "react-router-dom"
+import { format as timeAgo } from "timeago.js"
+import { Watch, MapPin, Navigation, Layers } from "react-feather"
 import {
   Flex,
   Heading,
@@ -19,24 +19,24 @@ import {
   Stack,
   AspectRatioBox,
   StatGroup,
-} from "@chakra-ui/core";
+} from "@chakra-ui/core"
 
-import { useSpaceX } from "../utils/use-space-x";
-import { formatDateTime } from "../utils/format-date";
-import Error from "./error";
-import Breadcrumbs from "./breadcrumbs";
+import { useSpaceX } from "../utils/use-space-x"
+import { formatDateTime } from "../utils/format-date"
+import Error from "./error"
+import Breadcrumbs from "./breadcrumbs"
 
 export default function Launch() {
-  let { launchId } = useParams();
-  const { data: launch, error } = useSpaceX(`/launches/${launchId}`);
+  let { launchId } = useParams()
+  const { data: launch, error } = useSpaceX(`/launches/${launchId}`)
 
-  if (error) return <Error />;
+  if (error) return <Error />
   if (!launch) {
     return (
       <Flex justifyContent="center" alignItems="center" minHeight="50vh">
         <Spinner size="lg" />
       </Flex>
-    );
+    )
   }
 
   return (
@@ -59,7 +59,7 @@ export default function Launch() {
         <Gallery images={launch.links.flickr_images} />
       </Box>
     </div>
-  );
+  )
 }
 
 function Header({ launch }) {
@@ -110,7 +110,7 @@ function Header({ launch }) {
         )}
       </Stack>
     </Flex>
-  );
+  )
 }
 
 function TimeAndLocation({ launch }) {
@@ -146,11 +146,11 @@ function TimeAndLocation({ launch }) {
         <StatHelpText>{launch.launch_site.site_name}</StatHelpText>
       </Stat>
     </SimpleGrid>
-  );
+  )
 }
 
 function RocketInfo({ launch }) {
-  const cores = launch.rocket.first_stage.cores;
+  const cores = launch.rocket.first_stage.cores
 
   return (
     <SimpleGrid
@@ -210,7 +210,7 @@ function RocketInfo({ launch }) {
         </Stat>
       </StatGroup>
     </SimpleGrid>
-  );
+  )
 }
 
 function Video({ launch }) {
@@ -223,7 +223,7 @@ function Video({ launch }) {
         allowFullScreen
       />
     </AspectRatioBox>
-  );
+  )
 }
 
 function Gallery({ images }) {
@@ -235,5 +235,5 @@ function Gallery({ images }) {
         </a>
       ))}
     </SimpleGrid>
-  );
+  )
 }
