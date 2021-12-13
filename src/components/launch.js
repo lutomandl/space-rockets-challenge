@@ -19,13 +19,15 @@ import {
   Stack,
   AspectRatio,
   StatGroup,
+  Tooltip
 } from "@chakra-ui/react"
 
 import { useSpaceX } from "../utils/use-space-x"
-import { formatDateTime } from "../utils/format-date"
+import { formatDateTime, formatDateTimeLocal } from "../utils/format-date"
 import Error from "./error"
 import Breadcrumbs from "./breadcrumbs"
 import StarButton from "./star-button"
+
 
 export default function Launch() {
   let { launchId } = useParams()
@@ -125,11 +127,13 @@ function TimeAndLocation({ launch }) {
             Launch Date
           </Box>
         </StatLabel>
-        <StatNumber fontSize={["md", "xl"]}>
-          {formatDateTime(launch.launch_date_local)}
-        </StatNumber>
+        <Tooltip label={formatDateTimeLocal(launch.launch_date_local)} fontSize="xl" placement='top-start' openDelay={1000} bg="gray.300" color="black" shouldWrapChildren>
+          <StatNumber fontSize={["md", "xl"]}>
+            {formatDateTime(launch.launch_date_local)}
+          </StatNumber>
+        </Tooltip>
         <StatHelpText>{timeAgo(launch.launch_date_utc)}</StatHelpText>
-      </Stat>
+      </Stat> 
       <Stat>
         <StatLabel display="flex">
           <Box as={MapPin} width="1em" />{" "}
