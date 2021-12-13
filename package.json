@@ -16,12 +16,12 @@
     "prettier": "^2.5.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-redux": "^7.2.6",
-    "redux": "^4.1.2",
     "react-feather": "^2.0.8",
+    "react-redux": "^7.2.6",
     "react-router": "^6.0.0-alpha.3",
     "react-router-dom": "^6.0.0-alpha.3",
     "react-scripts": "3.4.3",
+    "redux": "^4.1.2",
     "redux-persist": "^6.0.0",
     "swr": "^0.3.0",
     "timeago.js": "^4.0.2"
@@ -29,7 +29,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test"
+    "test": "jest"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -45,5 +45,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-react": "^7.16.0",
+    "babel-jest": "^27.4.4",
+    "jest": "^27.4.4"
   }
 }

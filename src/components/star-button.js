@@ -3,6 +3,8 @@ import { IconButton, Tooltip } from "@chakra-ui/react"
 import { StarIcon } from "@chakra-ui/icons"
 import { connect } from "react-redux"
 
+import { addFavorite, removeFavorite } from "./actions/favoritesActions"
+
 function StarButton({ launch, ...props }) {
   let label = "Add to favorites"
   let iconColor = "grey"
@@ -49,15 +51,9 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    removeFavorite: (flight_number) => {
-      dispatch({ type: "REMOVE_FAVORITE", id: flight_number })
-    },
-    addFavorite: (launch) => {
-      dispatch({ type: "ADD_FAVORITE", payload: launch })
-    },
-  }
+const mapDispatchToProps = {
+  removeFavorite,
+  addFavorite,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(StarButton)

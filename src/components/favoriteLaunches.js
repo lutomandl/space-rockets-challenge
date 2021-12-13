@@ -14,11 +14,10 @@ import { connect } from "react-redux"
 
 import { LaunchItem } from "./launches"
 
-function FavoriteLaunches(props) {
+function FavoriteLaunches({ favorites }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
-  const launches = props.favorites
-
+  
   return (
     <>
       <Button mr={5} mt={5} ref={btnRef} onClick={onOpen}>
@@ -35,13 +34,13 @@ function FavoriteLaunches(props) {
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader borderBottomWidth="1px">
-            Your Favorite Launches ({props.favorites.length})
+            Your Favorite Launches ({favorites.length})
           </DrawerHeader>
           <DrawerBody>
-            {launches.length > 0 ? (
+            {favorites.length > 0 ? (
               <SimpleGrid m={[2, null, 6]} minChildWidth="350px" spacing="4">
-                {launches &&
-                  launches
+                {favorites &&
+                  favorites
                     .flat()
                     .map((launch) => (
                       <LaunchItem launch={launch} key={launch.flight_number} />
