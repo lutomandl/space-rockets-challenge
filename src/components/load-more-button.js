@@ -1,5 +1,5 @@
-import React from "react";
-import { Spinner, Flex, Button } from "@chakra-ui/core";
+import React from "react"
+import { Spinner, Flex, Button } from "@chakra-ui/react"
 
 export default function LoadMoreButton({
   loadMore,
@@ -9,7 +9,7 @@ export default function LoadMoreButton({
 }) {
   const isReachingEnd =
     data?.[0]?.length === 0 ||
-    (data && data[data.length - 1]?.length < pageSize);
+    (data && data[data.length - 1]?.length < pageSize)
 
   return (
     <Flex justifyContent="center" my="100px">
@@ -23,5 +23,5 @@ export default function LoadMoreButton({
         )}
       </Button>
     </Flex>
-  );
+  )
 }

@@ -1,7 +1,7 @@
-import React from "react";
-import { useParams, Link as RouterLink } from "react-router-dom";
-import { format as timeAgo } from "timeago.js";
-import { Watch, MapPin, Navigation, Layers } from "react-feather";
+import React from "react"
+import { useParams, Link as RouterLink } from "react-router-dom"
+import { format as timeAgo } from "timeago.js"
+import { Watch, MapPin, Navigation, Layers } from "react-feather"
 import {
   Flex,
   Heading,
@@ -17,27 +17,29 @@ import {
   Image,
   Link,
   Stack,
-  AspectRatioBox,
+  AspectRatio,
   StatGroup,
   Tooltip
-} from "@chakra-ui/core";
+} from "@chakra-ui/react"
 
-import { useSpaceX } from "../utils/use-space-x";
-import { formatDateTime, formatDateTimeLocal } from "../utils/format-date";
-import Error from "./error";
-import Breadcrumbs from "./breadcrumbs";
+import { useSpaceX } from "../utils/use-space-x"
+import { formatDateTime, formatDateTimeLocal } from "../utils/format-date"
+import Error from "./error"
+import Breadcrumbs from "./breadcrumbs"
+import StarButton from "./star-button"
+
 
 export default function Launch() {
-  let { launchId } = useParams();
-  const { data: launch, error } = useSpaceX(`/launches/${launchId}`);
+  let { launchId } = useParams()
+  const { data: launch, error } = useSpaceX(`/launches/${launchId}`)
 
-  if (error) return <Error />;
+  if (error) return <Error />
   if (!launch) {
     return (
       <Flex justifyContent="center" alignItems="center" minHeight="50vh">
         <Spinner size="lg" />
       </Flex>
-    );
+    )
   }
 
   return (
@@ -60,7 +62,7 @@ export default function Launch() {
         <Gallery images={launch.links.flickr_images} />
       </Box>
     </div>
-  );
+  )
 }
 
 function Header({ launch }) {
@@ -97,21 +99,22 @@ function Header({ launch }) {
         {launch.mission_name}
       </Heading>
       <Stack isInline spacing="3">
-        <Badge variantColor="purple" fontSize={["xs", "md"]}>
+        <Badge colorScheme="purple" fontSize={["xs", "md"]}>
           #{launch.flight_number}
         </Badge>
         {launch.launch_success ? (
-          <Badge variantColor="green" fontSize={["xs", "md"]}>
+          <Badge colorScheme="green" fontSize={["xs", "md"]}>
             Successful
           </Badge>
         ) : (
-          <Badge variantColor="red" fontSize={["xs", "md"]}>
+          <Badge colorScheme="red" fontSize={["xs", "md"]}>
             Failed
           </Badge>
         )}
+        <StarButton launch={launch} />
       </Stack>
     </Flex>
-  );
+  )
 }
 
 function TimeAndLocation({ launch }) {
@@ -149,11 +152,11 @@ function TimeAndLocation({ launch }) {
         <StatHelpText>{launch.launch_site.site_name}</StatHelpText>
       </Stat>
     </SimpleGrid>
-  );
+  )
 }
 
 function RocketInfo({ launch }) {
-  const cores = launch.rocket.first_stage.cores;
+  const cores = launch.rocket.first_stage.cores
 
   return (
     <SimpleGrid
@@ -213,20 +216,20 @@ function RocketInfo({ launch }) {
         </Stat>
       </StatGroup>
     </SimpleGrid>
-  );
+  )
 }
 
 function Video({ launch }) {
   return (
-    <AspectRatioBox maxH="400px" ratio={1.7}>
+    <AspectRatio maxH="400px" ratio={1.7}>
       <Box
         as="iframe"
         title={launch.mission_name}
         src={`https://www.youtube.com/embed/${launch.links.youtube_id}`}
         allowFullScreen
       />
-    </AspectRatioBox>
-  );
+    </AspectRatio>
+  )
 }
 
 function Gallery({ images }) {
@@ -238,5 +241,5 @@ function Gallery({ images }) {
         </a>
       ))}
     </SimpleGrid>
-  );
+  )
 }
