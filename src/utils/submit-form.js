@@ -4,7 +4,7 @@ export default async function handleSubmit(values, launch, price) {
   const SES_CONFIG = {
     accessKeyId: process.env.REACT_APP_ACCESS_KEY_ID,
     secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY,
-    region: process.env.REACT_APP_REACT_APP_REGION,
+    region: process.env.REACT_APP_REGION,
   }
 
   console.log(SES_CONFIG)
