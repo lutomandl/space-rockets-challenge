@@ -2,9 +2,9 @@ import AWS from "aws-sdk"
 
 export default async function handleSubmit(values, launch, price) {
   const SES_CONFIG = {
-    accessKeyId: process.env.ACCESS_KEY_ID,
-    secretAccessKey: process.env.SECRET_ACCESS_KEY,
-    region: process.env.REGION,
+    accessKeyId: process.env.REACT_APP_ACCESS_KEY_ID,
+    secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY,
+    region: process.env.REACT_APP_REACT_APP_REGION,
   }
 
   console.log(SES_CONFIG)
