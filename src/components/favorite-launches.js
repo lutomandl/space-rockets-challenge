@@ -17,7 +17,7 @@ import { LaunchItem } from "./launches"
 function FavoriteLaunches({ favorites }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
-  
+
   return (
     <>
       <Button mr={5} mt={5} ref={btnRef} onClick={onOpen}>

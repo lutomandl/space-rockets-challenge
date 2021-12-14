@@ -17,7 +17,7 @@ import Error from "./error"
 import Breadcrumbs from "./breadcrumbs"
 import LoadMoreButton from "./load-more-button"
 import StarButton from "./star-button"
-import FavoriteLaunches from "./favoriteLaunches"
+import FavoriteLaunches from "./favorite-launches"
 
 const PAGE_SIZE = 12
 
