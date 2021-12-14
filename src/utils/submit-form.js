@@ -50,16 +50,18 @@ export default async function handleSubmit(values, launch, price) {
       ReplyToAddresses: ["lutomandl@gmail.com"],
       Source: "lutomandl@gmail.com",
     }
+    let success
 
-    AWS_SES.sendEmail(params, function (err, data) {
+    await AWS_SES.sendEmail(params, function (err, data) {
       if (err) {
         console.log(err, err.stack)
-        return false
+        success = false
       } else {
         console.log(data) // successful response
-        return true
+        success = true
       }
     })
+    return success
   } catch (error) {
     console.log(error)
     return false
