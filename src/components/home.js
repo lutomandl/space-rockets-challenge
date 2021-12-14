@@ -6,7 +6,8 @@ import { Link as BrowserLink } from "react-router-dom"
 export default function Home() {
   return (
     <Stack m="6" spacing="6">
-      <PageLink url="/launches">Browse SpaceX Launches</PageLink>
+      <PageLink url="/tickets-shop">Purchase Launch Tickets</PageLink>
+      <PageLink url="/launches">Browse Past SpaceX Launches</PageLink>
       <PageLink url="/launch-pads">Browse SpaceX Launch Pads</PageLink>
     </Stack>
   )

@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment from "moment"
 
 export function formatDate(timestamp) {
   return new Intl.DateTimeFormat("en-US", {
@@ -10,9 +10,9 @@ export function formatDate(timestamp) {
 }
 
 export function formatDateTime(timestamp) {
-  return moment.parseZone(timestamp).format('MMMM D, YYYY, H:mm:ss A [GMT] Z')
+  return moment.parseZone(timestamp).format("MMMM D, YYYY, H:mm:ss A [GMT] Z")
 }
 
 export function formatDateTimeLocal(timestamp) {
-  return moment(timestamp).format('MMMM D, YYYY, H:mm:ss A [GMT] Z')
+  return moment(timestamp).format("MMMM D, YYYY, H:mm:ss A [GMT] Z")
 }

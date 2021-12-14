@@ -5,7 +5,14 @@ const fetcher = async (...args) => {
   if (!response.ok) {
     throw Error(response.statusText)
   }
-  return await response.json()
+  const data = await response.json()
+
+  // Due to a bug in SpaceX API, which is returning two upcoming launches with a single flight_number.
+  if (Array.isArray(data)) {
+    return handleDuplicates(data)
+  }
+
+  return data
 }
 
 function getSpaceXUrl(path, options) {
@@ -33,4 +40,13 @@ export function useSpaceXPaginated(path, options) {
       offset: options.limit * pageIndex,
     })
   }, fetcher)
+}
+
+function handleDuplicates(data) {
+  console.log(data)
+  return data
+    .map((launch) => launch.flight_number)
+    .map((flNumber, i, flNumbers) => flNumbers.indexOf(flNumber) === i && i)
+    .filter((launchIndex) => data[launchIndex])
+    .map((launchIndex) => data[launchIndex])
 }

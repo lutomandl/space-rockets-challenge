@@ -2,6 +2,7 @@ import React from "react"
 import { Routes, Route } from "react-router-dom"
 import { Flex, Text } from "@chakra-ui/react"
 
+import TicketsShop from "./tickets-shop"
 import Launches from "./launches"
 import Launch from "./launch"
 import Home from "./home"
@@ -14,6 +15,7 @@ export default function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/tickets-shop" element={<TicketsShop />} />
         <Route path="/launches" element={<Launches />} />
         <Route path="/launches/:launchId" element={<Launch />} />
         <Route path="/launch-pads" element={<LaunchPads />} />
