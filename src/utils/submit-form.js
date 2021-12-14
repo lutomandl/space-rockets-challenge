@@ -7,7 +7,6 @@ export default async function handleSubmit(values, launch, price) {
     region: process.env.REACT_APP_REGION,
   }
 
-  console.log(SES_CONFIG)
   const AWS_SES = new AWS.SES(SES_CONFIG)
 
   const { firstName, lastName, email } = values
@@ -20,12 +19,12 @@ export default async function handleSubmit(values, launch, price) {
 
       Information about the launch:\n
       - Mission: ${mission_name}\n
-      - Launch Site: ${launch_site.site_name}\n
+      - Launch site: ${launch_site.site_name}\n
       - Rocket: ${rocket.rocket_name}\n\n
 
       - Purchase price: ${price}\n\n
 
-      We will contact you once everything is planned about the other details.\n\n
+      We will contact you about the next steps and other details once everything is planned and set.\n\n
 
       See you soon, in SPACE!\n\n
 
@@ -44,24 +43,22 @@ export default async function handleSubmit(values, launch, price) {
         },
         Subject: {
           Charset: "UTF-8",
-          Data: "CONGRATULATION for the SpaceX tickets!",
+          Data: "CONGRATULATION on the SpaceX tickets!",
         },
       },
       ReplyToAddresses: ["lutomandl@gmail.com"],
       Source: "lutomandl@gmail.com",
     }
-    let success
 
-    await AWS_SES.sendEmail(params, function (err, data) {
+    return AWS_SES.sendEmail(params, function (err, data) {
       if (err) {
         console.log(err, err.stack)
-        success = false
+        return false
       } else {
-        console.log(data) // successful response
-        success = true
+        console.log(data)
+        return true
       }
     })
-    return success
   } catch (error) {
     console.log(error)
     return false
