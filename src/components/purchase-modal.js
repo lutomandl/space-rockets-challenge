@@ -19,6 +19,7 @@ import {
   Heading,
   Box,
   Text,
+  useToast,
 } from "@chakra-ui/react"
 import { ShoppingCart } from "react-feather"
 import { Formik, Field, Form } from "formik"
@@ -41,6 +42,7 @@ const ValidationSchema = Yup.object().shape({
 
 export default function PurchaseModal({ launch, price }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const toast = useToast()
 
   const initialRef = React.useRef()
   const finalRef = React.useRef()
@@ -56,7 +58,6 @@ export default function PurchaseModal({ launch, price }) {
       >
         Buy ticket
       </Button>
-
       <Modal
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
@@ -98,7 +99,6 @@ export default function PurchaseModal({ launch, price }) {
               {launch.mission_name}
             </Heading>
           </Flex>
-
           <Formik
             initialValues={{
               firstName: "",
@@ -107,7 +107,27 @@ export default function PurchaseModal({ launch, price }) {
               message: "",
             }}
             validationSchema={ValidationSchema}
-            onSubmit={(values) => handleSubmit(values)}
+            onSubmit={async (values) => {
+              const success = await handleSubmit(values, launch, price)
+              if (success) {
+                onClose()
+                toast({
+                  title: "Ticket purchased!",
+                  description: "You've just bougt yourself a ticket to space.",
+                  status: "success",
+                  duration: 9000,
+                  isClosable: true,
+                })
+              } else {
+                toast({
+                  title: "Oh no!",
+                  description: "Something went wrong. Try it again.",
+                  status: "error",
+                  duration: 9000,
+                  isClosable: true,
+                })
+              }
+            }}
           >
             {(props) => (
               <Form>
@@ -124,7 +144,6 @@ export default function PurchaseModal({ launch, price }) {
                   {launch.rocket.rocket_name} &bull;{" "}
                   {launch.launch_site.site_name}
                 </Box>
-
                 <Box
                   mt="1"
                   pl="24px"
@@ -207,7 +226,6 @@ export default function PurchaseModal({ launch, price }) {
                       </FormControl>
                     )}
                   </Field>
-
                   <Text
                     mt={30}
                     fontWeight="bold"
@@ -217,7 +235,6 @@ export default function PurchaseModal({ launch, price }) {
                     Total price: $ {price}
                   </Text>
                 </ModalBody>
-
                 <ModalFooter>
                   <Button type="submit" colorScheme="blue" mr={3}>
                     Purchase
